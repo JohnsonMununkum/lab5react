@@ -50,12 +50,21 @@ app.get('/api/movies', (req, res) => {
 
 });
 
+//server a file
+const path = require('path');
+
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 //error handling to catch any server errors when the server is run
 //will print out something is wrong if errors occur
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 });
+app.use(express.static('public'));
+//used for production build
 
 //adding status code to the response
 //res.status(201).json({ movies });
