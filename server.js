@@ -11,8 +11,11 @@ const port = 4000;
 //req short for http request
 //res short for http response
 //send a http response with the text hello world
-app.get('/', (req, res) => {
-    res.send('Hello to Data Representation & Querying');
+//adding a route parameter that returns hello [name]
+app.get('/hello/:name/:surname', (req, res) => {
+    const name = req.params.name;
+    const surname = req.params.surname;
+    res.send(`Hello ${name} ${surname}`);
 });
 
 //error handling to catch any server errors when the server is run
