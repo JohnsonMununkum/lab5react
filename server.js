@@ -5,6 +5,10 @@ const app = express();
 const port = 4000;
 //executing port at port 4000
 
+//body parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //here defining what were listening for
 //a htp request with a get method
 //listen for the url root slash 
@@ -56,6 +60,14 @@ const path = require('path');
 app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+app.get('/name', (req, res) => {
+    res.send("Hello " + req.query.firstname + " " + req.query.lastname);
+});
+
+app.post('/name', (req, res) => {
+    res.send("Hi " + req.body.firstname + " " + req.body.lastname);
+})
 
 //error handling to catch any server errors when the server is run
 //will print out something is wrong if errors occur
